@@ -1,13 +1,13 @@
 @startuml
-Bob ->x Alice
-Bob -> Alice
-Bob ->> Alice
-Bob -\ Alice
-Bob \\- Alice
-Bob //-- Alice
-Bob ->o Alice
-Bob o\\-- Alice
+User ->x Service
+User -> Service
+User ->> Service
+User -\ Service
+User \\- Service
+User //-- Service
+User ->o Service
+User o\\-- Service
 
-Bob <-> Alice
-Bob <->o Alice
+User <-> Service
+User <->o Service
 @enduml

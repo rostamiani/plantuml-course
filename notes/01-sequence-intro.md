@@ -4,19 +4,20 @@
 
 - simple arrow (->)
 - dotted arrow( -->)
+- self link
 - link message (:)
-- long title ("" & as)
 - new line (\n)
-
--Any Question?
-
-- activate and deactivate (+ -)
-- outside arrow ([->)
+- activate and deactivate (activate/deactivate/destroy)
+- outside arrow (-> / ?)
 - note (note right:)
 - note multiline (end note)
 - note place (left of) (over)
-- defining shapes (actor) (ordered)
 
+-Any Question?
+
+- group (group label/end)
+- defining shapes (actor) (ordered)
+- long title ("" & as)
 
 ## sample:
 
