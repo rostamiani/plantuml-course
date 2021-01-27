@@ -10,6 +10,7 @@
 
 -Any Question?
 
+- activate and deactivate (+ -)
 - outside arrow ([->)
 - note (note right:)
 - note multiline (end note)
