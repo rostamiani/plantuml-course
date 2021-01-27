@@ -6,11 +6,14 @@
 
 ### Sequence Diagrams
 
-- Intro
+- Sequence Intro
 - Shapes
 - Arrows
 - Numbering
 
-### Drawing Usacase Graphs
+### Drawing Usacases
+
+- Usecase Intro
+- Shapes
 
 ### Using PlantUML inside markdowns
