@@ -1,11 +1,5 @@
-@startuml test
+@startuml 
 
-user->service
-service->DB
-note over user
- get some info
-more
-info
- end note
+
 
 @enduml
