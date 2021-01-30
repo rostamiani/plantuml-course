@@ -1,31 +1,69 @@
 @startuml
-title https://plantuml.com/sequence-diagram
-actor UI #red
-box "Kontroler" #LightBlue
-	control Kontroler
-	database kontrolerDB
-end box
-box "Monitor" #DarkSalmon
-	control Monitor
-	database monitorDB
-end box
+title Skyroom Authentication an Authorization process
+
+actor Client as client #red
+participant "Kong-Gateway" as kong #APPLICATION
+participant "Auth-Service" as auth
+queue "Rabbit-MQ" as rabbit #orange
+participant "User-Service" as user
+
+note across
+Case 'request for Register':
+- user sends signup Request to gateway
+- gateway proxy Request to User Service
+- user service create new user and produce Event along hashed permission and user data to Auth service
+- Auth service generate Token and store in a cookie then sent to client via gateway
+end note
+
 autonumber
-UI -> Kontroler: POST /host
-Kontroler -> Kontroler: Walidacja danych
-alt dane poprawne
-    Kontroler -> kontrolerDB: dodaj do bazy
-    Kontroler -> Monitor: POST /host
-	Monitor -> Monitor: Walidacja danych
-	alt dane poprane
-	    Monitor -> monitorDB: Dodaj do bazy
-	    Monitor --> Kontroler: status 201
-		Kontroler --> UI: status 201
-	else dane niepoprawne
-	    Monitor -> Kontroler: status 400
-		Kontroler --> UI: status 400
-	end
-else danie niepoprawne
-    Kontroler --> UI: status 400
+client->kong:signup request
+kong->user:proxy to User Service
+user-->rabbit:Produce signup event
+rabbit-->auth:Consume signup event
+auth-->kong:Add JWT to request
+kong-->client:request redirect to profile page
+
+note across
+Case 'request for Particular Services':
+- user is registered and logged in
+- gateway proxy Request to User Service
+- user has all permissions and roles necessary to access particular-service
+- or does not have all permissions
+- user get needed data or recives an error due to permissions
+end note
+
+autonumber 1
+client->kong:added JWT and Request particular service
+kong->auth:rquest for Authentication
+alt on authentication faliure
+    auth-->kong:failing identity
+    kong-->client:unAuthorized error
 end
+autonumber 3
+auth-->kong:Add hashed permission to header
+kong->user:send request + user permission to particular service
+user->:Send request \nto other services
+user<--: Get the result
+user-->kong:Send back Required Data
+alt on role/permission absent or error
+    autonumber 7
+    user-->kong:Return error
+end alt
+kong->client:send back to client
+
+note across
+Case 'request for LOG IN':
+- user is registered and not logged in
+- user send credential request
+- user is valid or not valid
+end note
+
+autonumber 1
+client->kong:login request
+kong->auth:request for checking identity
+auth->kong:Add JWT to request
+kong-->client:request redirect to profile page
+auth-->kong:Fail identity
+kong-->client:unAuthorized error
 
 @enduml
