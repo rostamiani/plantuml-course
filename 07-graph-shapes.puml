@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+
+actor actor
+database database
+queue queue
+usecase usecase
+boundary boundary
+control control
+entity entity
+node node
+component component
+cloud cloud
+
+@enduml

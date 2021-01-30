@@ -1,0 +1,49 @@
+@startuml
+' left to right direction
+
+rectangle "DB Servers" #LightYellow {
+    database "Auth Databases" as authdb
+    database "User Database" as userdb
+}
+
+: : as actor
+
+rectangle "kubernetes"{
+    [Auth]
+    queue RabbitMQ as authRabbit
+    queue RabbitMQ as monolithRabbit
+    (Kong-Gateway) as kong
+
+    [User]
+    [Email]
+    ' folder "Monolith" #LightGray{
+    '         [Exports]
+    '         [Payment]
+    '         [Ticket]
+    '         [Plans]
+    '         [Session logs-connections] as session
+    '         [Order-PI] as order
+    '         [File]
+        
+    ' }
+
+    usecase Monolith as "Exports
+    Payment
+    Ticket
+    Plans
+    Session logs-connections
+    Order-PI
+    File"
+}
+
+actor<->kong
+kong<->Monolith
+Monolith<-->monolithRabbit
+authdb<-->Auth
+userdb<-->User
+User->authRabbit
+authRabbit->Auth
+User<-->Monolith
+Email<-->Monolith
+
+@enduml

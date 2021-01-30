@@ -1,0 +1,28 @@
+@startuml
+
+node node1
+node node2
+node node3
+node node4
+node node5
+node node6
+node node7
+node node8
+node node9
+
+node1 --> node2 : normal
+node1 ..> node3 : dotted
+node1 ~~> node4 : dashed
+node1 ==> node5 : bold
+
+node2 -0-> node6
+node3 -(0-> node7
+node4 -0)-> node8
+node5 -(0)-> node9
+
+node6 .[#red].> (End)
+node7 -[#blue]-> (End)
+node8 -[#green]-> (End)
+node9 -[#DarkRed]-> (End)
+
+@enduml
