@@ -2,32 +2,24 @@
 ' left to right direction
 
 rectangle "DB Servers" #LightYellow {
-    database "Auth Databases" as authdb
-    database "User Database" as userdb
+    database "Auth Databases" as authdb #lightblue
+    database "User Database" as userdb #lightblue
 }
 
-: : as actor
+actor " " as actor
 
 rectangle "kubernetes"{
     [Auth]
-    queue RabbitMQ as authRabbit
-    queue RabbitMQ as monolithRabbit
-    (Kong-Gateway) as kong
+    queue RabbitMQ as authRabbit #orange
+    queue RabbitMQ as monolithRabbit #orange
+    (Kong-Gateway) as kong #application
 
     [User]
     [Email]
-    ' folder "Monolith" #LightGray{
-    '         [Exports]
-    '         [Payment]
-    '         [Ticket]
-    '         [Plans]
-    '         [Session logs-connections] as session
-    '         [Order-PI] as order
-    '         [File]
-        
-    ' }
 
-    usecase Monolith as "Exports
+    usecase Monolith as "..<b>Monolith Services</b>..
+    
+    Exports
     Payment
     Ticket
     Plans
