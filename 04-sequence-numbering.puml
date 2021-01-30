@@ -1,7 +1,0 @@
-@startuml test
-
-user->service: Get service
-service->database: DB Query
-database->service: Response
-
-@enduml
