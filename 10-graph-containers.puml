@@ -6,6 +6,7 @@ artifact artifact {
 card card {
 }
 cloud cloud {
+    (MyService)->(DB)
 }
 component component {
 }

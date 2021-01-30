@@ -8,6 +8,8 @@
 کشیدن نمودارها
 آشنایی کلی با اینکه چه امکاناتی می‌تونه بهمون بده
 
+یک لیستی از امکانات پرکاربرد آماده کردم. یکی یکی با هم مرور می‌کنیم
+
 - simple arrow (->)
 - dotted arrow( -->)
 - self link
@@ -22,7 +24,7 @@
 -Any Question?
 
 - group (group label/end)
-- defining shapes (actor) (ordered)
+- defining orders & shapes (actor) 
 - long title ("" & as)
 - color (actor user #red)
 - autonumber

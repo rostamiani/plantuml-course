@@ -1,5 +1,31 @@
 @startuml 
 
+actor user #f33
+participant "auth Service" as auth
+database db #ff9
+
+autonumber 1
+user-->auth:authenticate to \n another next
+activate db
+group 10 times
+autonumber 3
+    auth->db:request
+    auth->auth:self
+    note over auth,db: My note
+    db->auth:response
+    destroy db
+end loop
+note over user
+a long 
+note here
+a long 
+note here
+a long 
+note here
+end note
+auth->user:data
+-> auth
+auth->:to other Services
 
 
 @enduml
