@@ -1,5 +1,4 @@
 @startuml
-title Skyroom Authentication an Authorization process
 
 actor Client as client #red
 participant "Kong-Gateway" as kong #APPLICATION
